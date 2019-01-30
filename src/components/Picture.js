@@ -1,44 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../App.css';
+import React from "react";
+import PropTypes from "prop-types";
+import "../App.css";
 
 class Picture extends React.Component {
-    /*state = {
-        visible: false
-    }
+	handleDeleteClick = e => {
+		e.preventDefault();
+		const { id } = this.props.data;
 
-    handleReadMoreClick = (e) => {
-        e.preventDefault();
-        this.setState({visible: true});
-    }*/
+		this.props.onClickDel(id);
+	};
 
-    render (){
-        const { imageTitle, imageURL } = this.props.data;
-        return (
-            <div className='picture'>
-                <div className='picture__title'>
-                    <p>{imageTitle}</p>
-                </div>
-                <div className='picture__image'>
-                    <img className='picture__img' src={imageURL} />
-                </div>
-            {/* {
-                    !this.state.visible && <a href='#readmore' onClick={this.handleReadMoreClick} className='news__readmore'>Подробнее</a>
-                }
-                {
-                    this.state.visible && <p className='news__big-text'>{bigText}</p>
-                }*/}
-            </div>
-        )
-    }
+	render() {
+		const { imageTitle, imageURL, visible } = this.props.data;
+		return (
+			visible && (
+				<div className="picture">
+					<div className="picture__title">
+						<span>{imageTitle}</span>
+						<a href="#del" onClick={this.handleDeleteClick}>
+							Delete
+						</a>
+					</div>
+					<div className="picture__image">
+						<img className="picture__img" src={imageURL} alt="" />
+					</div>
+				</div>
+			)
+		);
+	}
 }
 
 Picture.propTypes = {
-    data: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        imageTitle: PropTypes.string.isRequired,            
-        imageURL: PropTypes.string.isRequired        
-    })
-}
+	onClickDel: PropTypes.func.isRequired,
+	data: PropTypes.shape({
+		id: PropTypes.number.isRequired,
+		imageTitle: PropTypes.string.isRequired,
+		imageURL: PropTypes.string.isRequired
+	})
+};
 
-export {Picture};
+export { Picture };
