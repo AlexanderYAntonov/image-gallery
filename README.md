@@ -1,6 +1,6 @@
-#test task Image Gallery
+# test task Image Gallery
 
-#implemented with React.js
+# implemented with React.js
 
 run
 
